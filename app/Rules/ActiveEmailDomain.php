@@ -25,11 +25,11 @@ class ActiveEmailDomain implements Rule
      */
     public function passes($attribute, $value)
     {
-         // Extract the email domain from the email address
-         $domain = substr($value, strpos($value, '@') + 1);
+        // Extract the email domain from the email address
+        $domain = substr($value, strpos($value, '@') + 1);
 
-         // Check if the email domain has an MX record
-         return checkdnsrr($domain, 'MX');
+        // Check if the email domain has an MX record
+        return checkdnsrr($domain, 'MX');
     }
 
     /**

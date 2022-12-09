@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubscriberRequest;
 use App\Http\Resources\SubscriberCollection;
 use App\Models\Subscriber;
-use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
 {
@@ -31,7 +30,7 @@ class SubscriberController extends Controller
         Subscriber::create($validated);
 
         return response()->json([
-            'message' => 'Subscriber has been successfully created.'
+            'message' => 'Subscriber has been successfully created.',
         ]);
     }
 
@@ -45,7 +44,7 @@ class SubscriberController extends Controller
     public function update(StoreSubscriberRequest $request, Subscriber $subscriber)
     {
         return response()->json([
-            'message' => 'Subscriber has been successfully updated.'
+            'message' => 'Subscriber has been successfully updated.',
         ]);
     }
 
@@ -60,7 +59,7 @@ class SubscriberController extends Controller
         $subscriber->delete();
 
         return response()->json([
-            'message' => 'Subscriber has been successfully deleted.'
+            'message' => 'Subscriber has been successfully deleted.',
         ]);
     }
 }
