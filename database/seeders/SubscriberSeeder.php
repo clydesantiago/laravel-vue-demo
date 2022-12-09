@@ -18,7 +18,7 @@ class SubscriberSeeder extends Seeder
         // Create 50 subscribers that each has one related fields.
         Subscriber::factory()
             ->count(100)
-            ->hasFields(1)
+            ->hasFields(2)
             ->create();
     }
 }

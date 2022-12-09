@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubscriberRequest;
+use App\Http\Resources\SubscriberCollection;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
@@ -14,62 +16,37 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new SubscriberCollection(Subscriber::latest()->get()->load('fields'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreSubscriberRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSubscriberRequest $request)
     {
-        //
-    }
+        $validated = $request->validated();
+        Subscriber::create($validated);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subscriber  $subscriber
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subscriber $subscriber)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subscriber  $subscriber
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subscriber $subscriber)
-    {
-        //
+        return response()->json([
+            'message' => 'Subscriber has been successfully created.'
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreSubscriberRequest
      * @param  \App\Models\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subscriber $subscriber)
+    public function update(StoreSubscriberRequest $request, Subscriber $subscriber)
     {
-        //
+        return response()->json([
+            'message' => 'Subscriber has been successfully updated.'
+        ]);
     }
 
     /**
@@ -80,6 +57,10 @@ class SubscriberController extends Controller
      */
     public function destroy(Subscriber $subscriber)
     {
-        //
+        $subscriber->delete();
+
+        return response()->json([
+            'message' => 'Subscriber has been successfully deleted.'
+        ]);
     }
 }
