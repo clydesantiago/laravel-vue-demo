@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>How to Install Tailwind CSS 3 in Laravel 9 With Vite 3 - TechvBlogs</title>
+    <title>{{ config('app.name') }}</title>
 
     @vite('resources/js/app.js')
 </head>
