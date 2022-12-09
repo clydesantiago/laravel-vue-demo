@@ -23,3 +23,4 @@ php artisan serve
 ✅ Link to the hosted application OR screenshots of the application in action
 
 Demo video: https://www.loom.com/share/4a267828f1e448ad8976f746135cf571
+Demo URL: https://laravel-vue-demo.clydesantiago.com/
