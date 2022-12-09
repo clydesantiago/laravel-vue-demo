@@ -4,26 +4,10 @@
     >
         <div class="inline-flex items-center space-x-2">
             <div>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6 text-slate-500 hover:text-indigo-600 hover:cursor-pointer"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                </svg>
-            </div>
-            <div>
                 <div>{{ subscriber.name }}</div>
-                <small class="text-gray-500">{{
-                    subscriber.email_address
-                }}</small>
+                <small class="text-gray-500">
+                    {{ subscriber.email_address }} ({{ subscriber.state }})
+                </small>
 
                 <div class="text-gray-500 my-2">
                     <small
