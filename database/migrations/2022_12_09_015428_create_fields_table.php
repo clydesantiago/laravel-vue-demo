@@ -20,7 +20,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('title');
-            $table->string('type');
+            $table->enum('type', ['date', 'number', 'string', 'boolean']);
             $table->timestamps();
         });
     }

@@ -27,6 +27,11 @@ class StoreSubscriberRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email_address' => ['required', 'email', new ActiveEmailDomain()],
+            'state' => ['required', 'in:active,unsubscribed,junk,bounced,unconfirmed'],
+            'fields.*.id' => ['nullable', 'exists:fields,id'],
+            'fields.*.subscriber_id' => ['nullable', 'exists:subscribers,id'],
+            'fields.*.title' => ['required', 'string', 'max:255'],
+            'fields.*.type' => ['required', 'in:date,number,string,boolean'],
         ];
     }
 }

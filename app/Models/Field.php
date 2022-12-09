@@ -10,6 +10,13 @@ class Field extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['title', 'type'];
+
+    /**
      * Get the subscriber that owns the field.
      */
     public function subscriber()

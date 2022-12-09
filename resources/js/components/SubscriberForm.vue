@@ -38,6 +38,60 @@
                 />
             </div>
         </div>
+        <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+                <label for="state" class="block font-bold mb-2 md:mb-0 pr-4"
+                    >State:</label
+                >
+            </div>
+            <div class="md:w-2/3">
+                <select
+                    v-model="formData.state"
+                    class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                >
+                    <option value="active">active</option>
+                    <option value="unsubscribed">unsubscribed</option>
+                    <option value="junk">junk</option>
+                    <option value="bounced">bounced</option>
+                    <option value="unconfirmed">unconfirmed</option>
+                </select>
+            </div>
+        </div>
+        <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+                <button
+                    @click="handleAddField"
+                    type="button"
+                    class="py-2 px-4 border mr-2 mb-2 md:mb-0 border-gray-400 rounded-md inline-flex space-x-1 items-center text-dark hover:text-gray hover:bg-gray-200"
+                >
+                    <span class="text-sm font-medium md:block">
+                        Add field
+                    </span>
+                </button>
+            </div>
+            <div class="md:w-2/3">
+                <div
+                    class="flex mb-2"
+                    v-for="(field, fieldIndex) in formData.fields"
+                    :key="fieldIndex"
+                >
+                    <input
+                        v-model="field.title"
+                        placeholder="Enter field title"
+                        class="shadow mr-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                    <select
+                        v-model="field.type"
+                        class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    >
+                        <option value="date">date</option>
+                        <option value="number">number</option>
+                        <option value="string">string</option>
+                        <option value="boolean">boolean</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="md:flex md:items-center">
             <div class="md:w-1/3"></div>
             <div class="md:w-2/3">
@@ -46,17 +100,13 @@
                     type="button"
                     class="py-2 px-4 border mr-2 border-gray-400 rounded-md inline-flex space-x-1 items-center text-dark hover:text-gray hover:bg-gray-200"
                 >
-                    <span class="text-sm font-medium hidden md:block">
-                        Cancel
-                    </span>
+                    <span class="text-sm font-medium md:block"> Cancel </span>
                 </button>
                 <button
                     type="submit"
                     class="py-2 px-4 border border-slate-200 rounded-md inline-flex space-x-1 items-center text-indigo-200 hover:text-white bg-indigo-600 hover:bg-indigo-500"
                 >
-                    <span class="text-sm font-medium hidden md:block">
-                        Submit
-                    </span>
+                    <span class="text-sm font-medium md:block"> Submit </span>
                 </button>
             </div>
         </div>
@@ -73,13 +123,28 @@ export default {
             id: null,
             name: "",
             email: "",
-            fields: [],
+            state: "active",
+            fields: [
+                {
+                    title: "",
+                    type: "date",
+                },
+            ],
         };
 
         const formData = ref({});
 
         const setFormData = (subscriber = defaultData) => {
-            formData.value = { ...subscriber };
+            formData.value = JSON.parse(JSON.stringify(subscriber));
+        };
+
+        const handleAddField = () => {
+            const newData = { ...formData.value };
+            newData.fields.push({
+                title: "",
+                type: "date",
+            });
+            formData.value = newData;
         };
 
         const handleSubmit = (e) => {
@@ -98,7 +163,7 @@ export default {
                 .catch(({ response }) => alert(response.data.message));
         };
 
-        return { handleSubmit, setFormData, formData };
+        return { handleAddField, handleSubmit, setFormData, formData };
     },
 };
 </script>

@@ -14,9 +14,9 @@ class SubscriberSeeder extends Seeder
      */
     public function run()
     {
-        // Create 50 subscribers that each has one related fields.
+        // Create 20 subscribers that each has one related fields.
         Subscriber::factory()
-            ->count(100)
+            ->count(20)
             ->hasFields(2)
             ->create();
     }

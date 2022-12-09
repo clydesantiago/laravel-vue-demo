@@ -17,8 +17,8 @@ class FieldFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->randomElement(['Credit Card', 'Debit Card']),
-            'type' => fake()->creditCardType(),
+            'title' => 'My field '.fake()->numberBetween(1, 100),
+            'type' => fake()->randomElement(['date', 'number', 'string', 'boolean']),
         ];
     }
 }

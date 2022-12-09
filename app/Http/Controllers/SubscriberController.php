@@ -27,7 +27,8 @@ class SubscriberController extends Controller
     public function store(StoreSubscriberRequest $request)
     {
         $validated = $request->validated();
-        Subscriber::create($validated);
+        $subscriber = Subscriber::create($validated);
+        $subscriber->fields()->createMany($validated['fields']);
 
         return response()->json([
             'message' => 'Subscriber has been successfully created.',
@@ -43,6 +44,13 @@ class SubscriberController extends Controller
      */
     public function update(StoreSubscriberRequest $request, Subscriber $subscriber)
     {
+        $validated = $request->validated();
+        $subscriber->update($validated);
+        $fieldsToUpdate = collect($validated['fields'])->filter(fn ($field) => isset($field['id']))->values()->all();
+        $fieldsToCreate = collect($validated['fields'])->filter(fn ($field) => ! isset($field['id']))->values()->all();
+        $subscriber->fields()->upsert($fieldsToUpdate, ['id'], ['title', 'type']);
+        $subscriber->fields()->createMany($fieldsToCreate);
+
         return response()->json([
             'message' => 'Subscriber has been successfully updated.',
         ]);

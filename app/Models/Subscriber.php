@@ -14,7 +14,7 @@ class Subscriber extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'email_address'];
+    protected $fillable = ['name', 'email_address', 'state'];
 
     /**
      * Get the fields for the subscriber.
